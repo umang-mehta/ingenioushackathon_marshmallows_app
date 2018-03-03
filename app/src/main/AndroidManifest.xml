@@ -22,6 +22,10 @@
         <activity
             android:name=".AuthenticationActivity"
             android:label="@string/title_activity_authentication"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LicenseInfoActivity"
+            android:label="@string/title_activity_license_info"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

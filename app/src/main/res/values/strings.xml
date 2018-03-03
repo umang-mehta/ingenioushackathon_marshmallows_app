@@ -97,5 +97,6 @@
     </string>
 
     <string name="auth_edit_hint">Enter Dl. No. here(License no.)</string>
+    <string name="title_activity_license_info">LicenseInfoActivity</string>
 
 </resources>

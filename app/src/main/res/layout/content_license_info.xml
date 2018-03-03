@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.me.inghack.Activity.LicenseInfoActivity"
     tools:showIn="@layout/activity_license_info">
@@ -26,7 +27,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="@color/whiteShade"
                 android:orientation="vertical">
 
                 <TextView
@@ -35,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="DL no. :"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -44,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="DOI"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -53,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="CDOI"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -69,7 +70,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="@color/whiteShade"
                 android:orientation="vertical">
 
                 <TextView
@@ -77,8 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:text="Velid throught India"
-                    android:textColor="#ffffff"
+                    android:text="Valid throught India"
+                    android:textColor="#000000"
                     android:textSize="16dp" />
 
             </LinearLayout>
@@ -94,7 +95,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="@color/whiteShade"
                 android:orientation="vertical">
 
                 <TextView
@@ -103,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="Cov :"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -112,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="valid From :"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -121,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="Valid Till :"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -130,14 +131,18 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="20dp"
             android:elevation="10dp"
             card_view:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="@color/whiteShade"
+                android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -146,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="Name :"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -155,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="Son Of:"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -164,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="DOB :"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -173,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:text="Address :"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
             </LinearLayout>
 

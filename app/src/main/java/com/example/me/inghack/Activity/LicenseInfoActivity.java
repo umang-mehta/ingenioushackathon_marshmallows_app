@@ -2,6 +2,9 @@ package com.example.me.inghack.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,11 +16,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.me.inghack.R;
 import com.example.me.inghack.helper.HttpHandler;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,9 +41,12 @@ public class LicenseInfoActivity extends AppCompatActivity {
     TextView tx_dlno, tx_doi, tx_cdoi, tx_cov, tx_validFrom, tx_valitTill, tx_name, tx_sonOf, tx_dob, tx_address;
     String license = "";
     private ProgressDialog pDialog;
+    ImageView pic;
     private String TAG = LicenseInfoActivity.class.getSimpleName();
-    static String dlno = "", doi = "", cdoi = "", cov = "", validFrom = "", valitTill = "", uName = "", sonof = "", dob = "", address = "", email = "";
-
+    static String dlno = "", doi = "", cdoi = "", cov = "", validFrom = "", valitTill = "", uName = "", sonof = "", dob = "", address = "", image = "", email = "";
+    ImageLoader imageLoader;
+    DisplayImageOptions options;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +56,71 @@ public class LicenseInfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         //actionBar.setTitle(getString(R.string.CatTitle));
-        actionBar.setTitle("");
+
 
         setLicId();
 
         Intent get_selected = getIntent();
         license = (String) get_selected.getExtras().get("LicenseInfo");
 
-        new GetCategories().execute();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(LicenseInfoActivity.this)
+
+                // Thread priority
+
+                .threadPriority(Thread.NORM_PRIORITY)
+
+                // Deny cache multiple image sizes on memory
+
+                .denyCacheImageMultipleSizesInMemory()
+
+                // Processing order like a stack (last in, first out)
+
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+
+                // Max image size to cache on memory
+
+                .memoryCacheSize(1 * 1024 * 2014)
+
+                // Max image size to cache on disc
+
+                .diskCacheSize(2 * 1024 * 1024)
+
+                // Write log messages
+
+                .writeDebugLogs()
+
+                .build();
+
+        imageLoader = ImageLoader.getInstance();
+        imageLoader.init(config);
+        // Define image display options
+
+
+        options = new DisplayImageOptions.Builder()
+
+                // Cache loaded image in memory and disc
+
+                .cacheOnDisk(true)
+
+                .cacheInMemory(true)
+
+                // Show Android icon while loading
+
+                .showImageOnLoading(R.drawable.ic_menu_gallery)
+
+                .build();
+
+
+        new GetLicenseInfo().execute();
 
     }
 
     private void setLicId() {
 
+        pic = (ImageView) findViewById(R.id.pic);
         tx_dlno = (TextView) findViewById(R.id.ldlno);
         tx_doi = (TextView) findViewById(R.id.doi);
         tx_cdoi = (TextView) findViewById(R.id.cdoi);
@@ -75,7 +137,7 @@ public class LicenseInfoActivity extends AppCompatActivity {
     /**
      * Async task class to get json by making HTTP call
      */
-    private class GetCategories extends AsyncTask<Void, Void, Void> {
+    private class GetLicenseInfo extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -125,12 +187,9 @@ public class LicenseInfoActivity extends AppCompatActivity {
                     sonof = c.getString("son_of");
                     dob = c.getString("dob");
                     address = c.getString("address");
+                    image = c.getString("image");
                     email = c.getString("email_id");
-                    uName = c.getString("dlno");
-                    sonof = c.getString("dlno");
-                    dob = c.getString("dlno");
-                    address = c.getString("dlno");
-                    email = c.getString("dlno");
+
 
 
                 } catch (final JSONException e) {
@@ -171,7 +230,7 @@ public class LicenseInfoActivity extends AppCompatActivity {
                 pDialog.dismiss();
 
 
-            Toast.makeText(LicenseInfoActivity.this, "dl_no: " + dlno, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LicenseInfoActivity.this, "dl_no: " + image, Toast.LENGTH_SHORT).show();
             tx_dlno.setText("DL no. :" + dlno);
             tx_doi.setText("DOI. :" + doi);
             tx_cdoi.setText("CDOI. :" + cdoi);
@@ -182,6 +241,17 @@ public class LicenseInfoActivity extends AppCompatActivity {
             tx_sonOf.setText("S/O. :" + sonof);
             tx_dob.setText("D.O.B. :" + dob);
             tx_address.setText("Address. :" + address);
+
+            actionBar.setTitle(""+uName);
+
+            imageLoader.loadImage(image, options, new SimpleImageLoadingListener() {
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    // Do whatever you want with Bitmap
+                    Drawable dimg = new BitmapDrawable(LicenseInfoActivity.this.getResources(), loadedImage);
+                    pic.setBackground(dimg);
+                }
+            });
 
 
         }
